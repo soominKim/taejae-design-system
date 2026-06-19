@@ -33,7 +33,11 @@ typeface is **Pretendard Variable**. Sections alternate white → pale purple ti
 
 No install needed.
 
-- **View it**: open [`design-system/design-system-taejae.html`](design-system/design-system-taejae.html)
+- **Live preview (no download)**: open the rendered showcase right in your browser →
+  **[design-system-taejae.html (live)](https://raw.githack.com/soominKim/taejae-design-system/main/design-system/design-system-taejae.html)**
+  _(once GitHub Pages is enabled, it's also at
+  https://soominkim.github.io/taejae-design-system/design-system/design-system-taejae.html )_
+- **View it locally**: open [`design-system/design-system-taejae.html`](design-system/design-system-taejae.html)
   in any browser — rendered color swatches, type specimens, buttons, cards, spacing, radius, and more.
 - **Read the spec**: [`design-system/design-system-taejae.md`](design-system/design-system-taejae.md)
   has every token (color scales, typography, spacing, radius, gradients, department colors), the
@@ -59,14 +63,16 @@ TAEJAE-branded design work.
 
 ### Option B — Install the `.skill` file
 
-**Easiest — just ask Claude (natural language).** In Claude Code, paste a request like this:
+**Easiest — just ask Claude (natural language).** In Claude Code, paste a request like this (copy it
+as-is):
 
-> Install the TAEJAE design-system skill. Download this .skill file and unzip it into
-> ~/.claude/skills/taejae-design-system/ so that SKILL.md ends up at
-> ~/.claude/skills/taejae-design-system/SKILL.md, then confirm it's discovered:
-> https://raw.githubusercontent.com/soominKim/taejae-design-system/main/skill/taejae-design-system.skill
+> Install the TAEJAE design-system skill from this repo: https://github.com/soominKim/taejae-design-system
+> Download the file `skill/taejae-design-system.skill` from the repo
+> (raw URL: https://raw.githubusercontent.com/soominKim/taejae-design-system/main/skill/taejae-design-system.skill),
+> then unzip it into `~/.claude/skills/taejae-design-system/` so that `SKILL.md` ends up at
+> `~/.claude/skills/taejae-design-system/SKILL.md`. Then confirm the skill is discovered.
 
-Claude fetches the file, unzips it to the right place, and the skill is auto-discovered.
+Claude fetches the file, unzips it to the right place, and the skill is auto-discovered — no manual steps.
 
 **Or do it by hand.** On GitHub, open
 [`skill/taejae-design-system.skill`](skill/taejae-design-system.skill) and click **Download** (the file
