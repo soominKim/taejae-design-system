@@ -1,6 +1,7 @@
 # TAEJAE Design System
 
-🌐 **English** · [**한국어**](#-한국어-korean)  — _click to jump; the Korean section is a collapsible toggle._
+[![English](https://img.shields.io/badge/Language-English-522C81?style=for-the-badge)](#taejae-design-system)
+[![한국어](https://img.shields.io/badge/%EC%96%B8%EC%96%B4-%ED%95%9C%EA%B5%AD%EC%96%B4-00A497?style=for-the-badge)](#한국어)
 
 The brand design system for **TAEJAE University AI Graduate School** (태재대학교 AI미래전략대학원), plus a
 Claude skill that generates on-brand UI for you.
@@ -107,14 +108,17 @@ and its `references/` for the full token tables, the Next.js component patterns,
 
 MIT — see [`LICENSE`](LICENSE).
 
+<br>
+
+---
 ---
 
-## 🇰🇷 한국어 (Korean)
-
-<details>
-<summary><b>한국어 안내 펼치기 / 접기 (click to expand)</b></summary>
-
 <br>
+
+# 한국어
+
+[![English](https://img.shields.io/badge/Language-English-cccccc?style=for-the-badge)](#taejae-design-system)
+[![한국어](https://img.shields.io/badge/%EC%96%B8%EC%96%B4-%ED%95%9C%EA%B5%AD%EC%96%B4-522C81?style=for-the-badge)](#한국어)
 
 **TAEJAE University AI Graduate School**(태재대학교 AI미래전략대학원)의 브랜드 디자인 시스템과, 이 브랜드에
 맞춰 UI를 만들어 주는 Claude 스킬입니다.
@@ -125,7 +129,9 @@ MIT — see [`LICENSE`](LICENSE).
 **직각**(Sharp Geometry, `border-radius: 0`), 서체는 **Pretendard Variable** 하나뿐입니다. 섹션은
 화이트 → 연보라 틴트 → 다크를 번갈아 깔아 리듬을 만듭니다.
 
-### 레포 구성
+---
+
+## 레포 구성
 
 ```
 .
@@ -136,10 +142,14 @@ MIT — see [`LICENSE`](LICENSE).
 │   └── taejae-design-system.skill  # 설치형 스킬 패키지(수동 설치용)
 ├── plugins/
 │   └── taejae-design-system/       # 같은 스킬, Claude Code 플러그인 형태
+│       ├── .claude-plugin/plugin.json
+│       └── skills/taejae-design-system/   (SKILL.md, references/, assets/)
 └── .claude-plugin/marketplace.json # 이 레포를 설치형 마켓플레이스로 만드는 매니페스트
 ```
 
-### 디자인 시스템 사용 (설치 불필요)
+---
+
+## 디자인 시스템 사용 (설치 불필요)
 
 - **라이브 미리보기(다운로드 없이)**: 브라우저에서 렌더링된 쇼케이스 바로 열기 →
   **[design-system-taejae.html (live)](https://raw.githack.com/soominKim/taejae-design-system/main/design-system/design-system-taejae.html)**
@@ -150,19 +160,23 @@ MIT — see [`LICENSE`](LICENSE).
 - **스펙 읽기**: [`design-system/design-system-taejae.md`](design-system/design-system-taejae.md) 에 모든
   토큰(색 스케일, 타이포, 스페이싱, 라디우스, 그라데이션, 학과색), 컴포넌트 카탈로그, Do/Don't가 있습니다.
 
-### 스킬 설치
+---
+
+## 스킬 설치
 
 스킬을 깔면 Claude가 태재 브랜드로 디자인합니다. *"태재 스타일로 랜딩페이지 만들어줘"* 처럼 말하면
 규칙에 맞는 Next.js + Tailwind v4 코드나 단독 HTML 목업을 만들어 줍니다.
 
-**방법 A — Claude Code, 한 줄 설치(추천)**
+### 방법 A — Claude Code, 한 줄 설치(추천)
+
 ```
 /plugin marketplace add soominKim/taejae-design-system
 /plugin install taejae-design-system
 ```
+
 필요하면 `/reload-plugins`. 태재 디자인 작업을 요청하면 스킬이 자동으로 활성화됩니다.
 
-**방법 B — `.skill` 파일 설치**
+### 방법 B — `.skill` 파일 설치
 
 가장 쉬운 방법은 **Claude에게 자연어로 부탁**하는 것입니다. Claude Code에 이렇게 붙여넣으세요:
 
@@ -173,10 +187,14 @@ MIT — see [`LICENSE`](LICENSE).
 
 직접 받으려면 GitHub에서 [`skill/taejae-design-system.skill`](skill/taejae-design-system.skill) 을 열고
 **Download** 클릭(미리보기가 비어 보이는 건 바이너리 zip이라 정상이며 ~16KB입니다). 그다음:
+
 - **Claude Code**: `~/.claude/skills/taejae-design-system/` 에 압축 해제(`SKILL.md`가 그 안에 오도록).
 - **Claude 데스크톱 / Cowork**: Customize → Skills → **+** 로 `.skill` 파일 추가.
 
-### 스킬이 강제하는 브랜드 규칙
+---
+
+## 스킬이 강제하는 브랜드 규칙
+
 - 보라는 액센트, 전체 배경 금지
 - 민트는 인터랙션 전용
 - Sharp Geometry — 카드·버튼에 둥근 모서리 금지
@@ -184,7 +202,12 @@ MIT — see [`LICENSE`](LICENSE).
 - 서체는 Pretendard Variable 하나
 - 절제된 깊이 — 그림자보다 1px 보더 우선
 
-### 라이선스
-MIT — [`LICENSE`](LICENSE) 참고.
+전체 토큰 표, Next.js 컴포넌트 패턴, HTML 방식은
+[`plugins/taejae-design-system/skills/taejae-design-system/SKILL.md`](plugins/taejae-design-system/skills/taejae-design-system/SKILL.md)
+와 그 `references/` 폴더를 참고하세요.
 
-</details>
+---
+
+## 라이선스
+
+MIT — [`LICENSE`](LICENSE) 참고.
