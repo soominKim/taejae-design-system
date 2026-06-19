@@ -57,13 +57,27 @@ mockup that follows the brand rules.
 Then reload plugins if needed (`/reload-plugins`). The skill activates automatically when you ask for
 TAEJAE-branded design work.
 
-### Option B — Manual install of the `.skill` file
+### Option B — Install the `.skill` file
 
-Download [`skill/taejae-design-system.skill`](skill/taejae-design-system.skill), then:
+**Easiest — just ask Claude (natural language).** In Claude Code, paste a request like this:
+
+> Install the TAEJAE design-system skill. Download this .skill file and unzip it into
+> ~/.claude/skills/taejae-design-system/ so that SKILL.md ends up at
+> ~/.claude/skills/taejae-design-system/SKILL.md, then confirm it's discovered:
+> https://raw.githubusercontent.com/soominKim/taejae-design-system/main/skill/taejae-design-system.skill
+
+Claude fetches the file, unzips it to the right place, and the skill is auto-discovered.
+
+**Or do it by hand.** On GitHub, open
+[`skill/taejae-design-system.skill`](skill/taejae-design-system.skill) and click **Download** (the file
+preview looks blank because it's a binary zip — that's normal, it's ~16 KB, not empty). Then:
 
 - **Claude Code**: unzip it into `~/.claude/skills/taejae-design-system/` (so `SKILL.md` sits at
   `~/.claude/skills/taejae-design-system/SKILL.md`). It's auto-discovered.
 - **Claude desktop / Cowork**: Customize → Skills → **+**, and add the `.skill` file.
+
+> Direct download (raw) URL, if you need it:
+> `https://raw.githubusercontent.com/soominKim/taejae-design-system/main/skill/taejae-design-system.skill`
 
 ---
 
