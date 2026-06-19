@@ -1,0 +1,116 @@
+/* TAEJAE Design System — drop-in tokens + component utilities for HTML mockups.
+   Paste into a <style> block or <link> it. Pair with Pretendard from CDN. */
+
+:root{
+  /* Purple (primary) */
+  --primary-50:#F7F3FB; --primary-100:#EDE5F5; --primary-200:#D9C8EA; --primary-300:#BFA3D9;
+  --primary-400:#A07AC4; --primary-500:#8254AC; --primary-600:#6B3F94; --primary-700:#522C81;
+  --primary-800:#47266E; --primary-900:#3B1F5B; --primary-950:#250F3D;
+  /* Mint (secondary) */
+  --secondary-50:#EFFEFB; --secondary-100:#C8FFF6; --secondary-200:#91FFED; --secondary-300:#52F5E1;
+  --secondary-400:#1EDECF; --secondary-500:#00C2B5; --secondary-600:#00A497; --secondary-700:#007D74;
+  --secondary-800:#06635D; --secondary-900:#0A524D; --secondary-950:#003230;
+  /* Warm neutrals (purple-tinted) */
+  --warm-50:#FAF9FB; --warm-100:#F4F2F6; --warm-200:#EAE7EE; --warm-300:#D8D3E0; --warm-400:#BFB8CA;
+  --warm-500:#A69DB3; --warm-600:#8E839C; --warm-700:#766B84; --warm-800:#635A6E; --warm-900:#524A5B;
+  --warm-950:#1A1625;
+  /* Department */
+  --dept-if:#522C81; --dept-hs:#00A497; --dept-bi:#2563EB; --dept-ns:#EA580C; --dept-dsai:#7C3AED;
+  /* Semantic */
+  --success:#00A497; --warning:#F59E0B; --error:#EF4444; --info:#3B82F6;
+  /* Layout (light) */
+  --background:#FFFFFF; --foreground:hsl(270 12% 10%); --card:#FFFFFF;
+  --muted:hsl(270 10% 96%); --muted-foreground:hsl(270 5% 45%);
+  --accent:hsl(270 30% 96%); --border:hsl(270 10% 90%); --ring:hsl(270 49% 34%);
+  /* Type */
+  --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,system-ui,
+    "Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  --radius:0; /* Sharp geometry */
+}
+
+/* Base */
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--background);color:var(--foreground);line-height:1.6;
+  word-break:keep-all;-webkit-font-smoothing:antialiased;font-feature-settings:"ss01","ss02","cv01"}
+
+/* Typography */
+.tj-eyebrow,.tj-hero__eyebrow{display:inline-block;font-size:13px;font-weight:600;text-transform:uppercase;
+  letter-spacing:.12em;color:var(--secondary-600);margin-bottom:10px}
+.tj-h1{font-size:clamp(40px,6vw,72px);font-weight:800;letter-spacing:-.035em;line-height:1.02}
+.tj-h2{font-size:clamp(28px,4vw,40px);font-weight:700;letter-spacing:-.03em;line-height:1.05}
+.tj-h3{font-size:clamp(22px,3vw,30px);font-weight:700;letter-spacing:-.02em}
+.tj-grad{background:linear-gradient(135deg,var(--primary-700),var(--secondary-600));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+/* Layout */
+.tj-container{max-width:1180px;margin:0 auto;padding:0 32px}
+.tj-section{padding:80px 0}
+.tj-section--alt{background:var(--primary-50)}
+.tj-section--dark{background:var(--warm-950);color:#fff}
+.tj-section--sm{padding:48px 0} .tj-section--lg{padding:96px 0} .tj-section--xl{padding:128px 0}
+
+/* Nav */
+.tj-nav{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--border);
+  padding:16px 32px;display:flex;align-items:center;gap:24px}
+.tj-nav__brand{font-weight:800;letter-spacing:-.02em;color:var(--primary-700)}
+
+/* Hero */
+.tj-hero{background:linear-gradient(135deg,var(--primary-700),var(--primary-950));color:#fff;
+  padding:96px 32px;text-align:left}
+.tj-hero .tj-hero__eyebrow{color:var(--secondary-400)}
+.tj-hero__title{font-size:clamp(40px,6vw,72px);font-weight:800;letter-spacing:-.035em;line-height:1.04}
+.tj-hero__desc{margin-top:20px;max-width:560px;font-size:18px;color:rgba(255,255,255,.85)}
+
+/* Buttons (all sharp) */
+.tj-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 24px;
+  font-family:var(--font);font-size:15px;font-weight:600;border:1px solid transparent;border-radius:0;
+  cursor:pointer;text-decoration:none;transition:all .15s ease;margin-top:24px}
+.tj-btn--default{background:var(--primary-700);color:#fff}
+.tj-btn--default:hover{background:var(--primary-600)}
+.tj-btn--secondary{background:var(--secondary-600);color:#fff}
+.tj-btn--secondary:hover{background:var(--secondary-700)}
+.tj-btn--outline{background:#fff;color:var(--foreground);border-color:var(--border)}
+.tj-btn--outline:hover{background:var(--primary-50);border-color:var(--primary-300)}
+.tj-btn--ghost{background:transparent;color:var(--foreground)}
+.tj-btn--ghost:hover{background:var(--primary-50)}
+.tj-btn--on-dark{background:#fff;color:var(--primary-700)}
+.tj-btn--on-dark:hover{background:var(--primary-50)}
+
+/* Badge */
+.tj-badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;color:#fff;
+  text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px}
+
+/* Card (flat — border before shadow) */
+.tj-card{background:#fff;border:1px solid var(--border);padding:24px}
+.tj-card--tint{background:var(--primary-50);border-color:var(--primary-100)}
+.tj-card--dark{background:var(--warm-950);color:#fff;border-color:var(--warm-950)}
+.tj-card--primary{background:var(--primary-700);color:#fff;border-color:var(--primary-700)}
+.tj-card__title{font-size:18px;font-weight:700;letter-spacing:-.01em;margin-bottom:8px}
+.tj-card__text{font-size:14px;line-height:1.55;opacity:.85}
+
+/* Grid */
+.tj-grid{display:grid;gap:24px}
+.tj-grid--2{grid-template-columns:repeat(2,1fr)}
+.tj-grid--3{grid-template-columns:repeat(3,1fr)}
+.tj-grid--4{grid-template-columns:repeat(4,1fr)}
+
+/* CTA banner */
+.tj-cta{background:var(--primary-700);color:#fff;padding:96px 32px;text-align:center}
+.tj-cta .tj-h2{color:#fff}
+
+/* Footer */
+.tj-footer{background:var(--warm-950);color:rgba(255,255,255,.7);padding:64px 32px;font-size:14px}
+
+/* Inputs (sharp, purple focus ring) */
+.tj-input{width:100%;height:44px;padding:0 14px;font-family:var(--font);font-size:14px;
+  border:1px solid var(--border);background:#fff;border-radius:0;outline:none;transition:border .15s}
+.tj-input:focus{border-color:var(--primary-700);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--primary-700) 18%,transparent)}
+
+/* Elevation helpers */
+.tj-elev-1{box-shadow:0 1px 2px rgba(26,22,37,.06)}
+.tj-elev-2{box-shadow:0 4px 6px -1px rgba(26,22,37,.08),0 12px 24px -8px rgba(26,22,37,.14)}
+
+@media(max-width:900px){
+  .tj-grid--2,.tj-grid--3,.tj-grid--4{grid-template-columns:1fr}
+}

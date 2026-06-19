@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Analysis — TAEJAE</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+  :root{
+    /* Brand — Purple */
+    --primary-50:#F7F3FB; --primary-100:#EDE5F5; --primary-200:#D9C8EA; --primary-300:#BFA3D9;
+    --primary-400:#A07AC4; --primary-500:#8254AC; --primary-600:#6B3F94; --primary-700:#522C81;
+    --primary-800:#47266E; --primary-900:#3B1F5B; --primary-950:#250F3D;
+    /* Brand — Mint */
+    --secondary-50:#EFFEFB; --secondary-100:#C8FFF6; --secondary-200:#91FFED; --secondary-300:#52F5E1;
+    --secondary-400:#1EDECF; --secondary-500:#00C2B5; --secondary-600:#00A497; --secondary-700:#007D74;
+    --secondary-800:#06635D; --secondary-900:#0A524D; --secondary-950:#003230;
+    /* Warm neutrals */
+    --warm-50:#FAF9FB; --warm-100:#F4F2F6; --warm-200:#EAE7EE; --warm-300:#D8D3E0; --warm-400:#BFB8CA;
+    --warm-500:#A69DB3; --warm-600:#8E839C; --warm-700:#766B84; --warm-800:#635A6E; --warm-900:#524A5B; --warm-950:#1A1625;
+    /* Department */
+    --dept-if:#522C81; --dept-hs:#00A497; --dept-bi:#2563EB; --dept-ns:#EA580C; --dept-dsai:#7C3AED;
+    /* Semantic */
+    --success:#00A497; --warning:#F59E0B; --error:#EF4444; --info:#3B82F6;
+    /* Layout */
+    --bg:#ffffff; --fg:hsl(270 12% 10%); --muted-fg:hsl(270 5% 45%); --border:hsl(270 10% 90%);
+
+    --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,system-ui,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);background:var(--bg);color:var(--fg);line-height:1.6;
+    word-break:keep-all;-webkit-font-smoothing:antialiased;font-feature-settings:"ss01","ss02","cv01";}
+
+  /* ---- Top hero bar ---- */
+  .topbar{background:var(--warm-950);color:#fff;padding:14px 32px;display:flex;align-items:center;gap:12px;
+    font-size:13px;position:sticky;top:0;z-index:50}
+  .topbar .dot{width:9px;height:9px;background:var(--secondary-400)}
+  .topbar .file{font-weight:600;letter-spacing:-.2px}
+  .topbar .muted{color:var(--warm-400)}
+  .topbar nav{margin-left:auto;display:flex;gap:22px}
+  .topbar nav a{color:var(--warm-300);text-decoration:none;font-size:12px;font-weight:500}
+  .topbar nav a:hover{color:#fff}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+
+  /* ---- Masthead ---- */
+  .masthead{padding:96px 0 64px;border-bottom:1px solid var(--border)}
+  .masthead .kicker{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;
+    text-transform:uppercase;letter-spacing:.12em;color:var(--secondary-600);margin-bottom:20px}
+  .masthead .kicker::before{content:"";width:24px;height:2px;background:var(--secondary-600)}
+  .masthead h1{font-size:clamp(40px,6vw,76px);font-weight:800;line-height:1.02;letter-spacing:-.035em}
+  .masthead h1 .grad{background:linear-gradient(135deg,var(--primary-700),var(--secondary-600));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .masthead p{margin-top:24px;max-width:680px;font-size:18px;color:var(--muted-fg)}
+  .pillrow{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px}
+  .pill{font-size:13px;font-weight:600;padding:7px 14px;border:1px solid var(--border);color:var(--fg)}
+  .pill.fill{background:var(--primary-700);color:#fff;border-color:var(--primary-700)}
+  .pill.mint{background:var(--secondary-600);color:#fff;border-color:var(--secondary-600)}
+
+  /* ---- Section ---- */
+  section{padding:72px 0;border-bottom:1px solid var(--border)}
+  .sec-no{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--secondary-600);margin-bottom:10px}
+  .sec-title{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+  .sec-desc{margin-top:16px;max-width:720px;color:var(--muted-fg);font-size:16px}
+  .sec-head{margin-bottom:44px}
+
+  /* ---- Color grid ---- */
+  .swatch-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .swatch{border:1px solid var(--border);background:#fff}
+  .swatch .chip{height:104px}
+  .swatch .meta{padding:14px 16px 18px}
+  .swatch .name{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .swatch .hex{font-size:12.5px;color:var(--muted-fg);font-variant-numeric:tabular-nums;margin-top:3px;font-weight:500}
+  .swatch .use{font-size:12.5px;color:var(--muted-fg);margin-top:9px;line-height:1.45}
+  .tag{font-size:10px;font-weight:700;padding:2px 6px;background:var(--primary-700);color:#fff;text-transform:uppercase;letter-spacing:.04em}
+  .scale-row{display:grid;grid-template-columns:repeat(11,1fr);gap:0;margin-top:14px;border:1px solid var(--border)}
+  .scale-cell{height:64px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:6px;
+    font-size:10px;font-weight:600;font-variant-numeric:tabular-nums}
+  .scale-label{font-size:13px;font-weight:700;margin:30px 0 6px}
+  .scale-sub{font-size:12.5px;color:var(--muted-fg);margin-bottom:4px}
+
+  /* ---- Typography specimens ---- */
+  .type-row{display:grid;grid-template-columns:200px 1fr;gap:32px;padding:22px 0;border-top:1px solid var(--border);align-items:baseline}
+  .type-row:first-child{border-top:none}
+  .type-spec{font-size:12.5px;color:var(--muted-fg);font-variant-numeric:tabular-nums}
+  .type-spec b{display:block;color:var(--fg);font-size:13px;font-weight:700;margin-bottom:4px}
+  .type-sample{letter-spacing:-.02em;color:var(--fg);overflow:hidden;text-overflow:ellipsis}
+  .t7{font-size:64px;font-weight:800;letter-spacing:-.04em;line-height:1}
+  .t6{font-size:52px;font-weight:800;letter-spacing:-.035em;line-height:1.02}
+  .t5{font-size:42px;font-weight:700;letter-spacing:-.03em}
+  .t4{font-size:34px;font-weight:700;letter-spacing:-.025em}
+  .t3{font-size:28px;font-weight:700;letter-spacing:-.02em}
+  .t2{font-size:23px;font-weight:600}
+  .tlead{font-size:20px;font-weight:400;color:var(--muted-fg)}
+  .tbody{font-size:16px;font-weight:400}
+  .tsm{font-size:14px;font-weight:400}
+  .eyebrow-demo{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--secondary-600)}
+
+  /* ---- Buttons ---- */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 20px;
+    font-family:var(--font);font-size:14px;font-weight:600;border:1px solid transparent;cursor:pointer;
+    border-radius:0;transition:all .15s ease}
+  .btn-default{background:var(--primary-700);color:#fff}
+  .btn-default:hover{background:var(--primary-600)}
+  .btn-secondary{background:var(--secondary-600);color:#fff}
+  .btn-secondary:hover{background:var(--secondary-700)}
+  .btn-outline{background:#fff;color:var(--fg);border-color:var(--border)}
+  .btn-outline:hover{background:var(--primary-50);border-color:var(--primary-300)}
+  .btn-ghost{background:transparent;color:var(--fg)}
+  .btn-ghost:hover{background:var(--primary-50)}
+  .btn-link{background:transparent;color:var(--primary-700);text-decoration:underline;text-underline-offset:4px;padding:0}
+  .btn-destructive{background:var(--error);color:#fff}
+  .btn-sm{height:32px;padding:0 14px;font-size:13px}
+  .btn-lg{height:44px;padding:0 26px;font-size:15px}
+  .demo-grid{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .demo-block{border:1px solid var(--border);padding:28px;background:var(--warm-50)}
+  .demo-block + .demo-block{margin-top:18px}
+  .demo-label{font-size:12px;font-weight:700;color:var(--muted-fg);text-transform:uppercase;letter-spacing:.06em;margin-bottom:16px}
+
+  /* ---- Cards & surfaces ---- */
+  .surf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{background:#fff;border:1px solid var(--border);padding:24px}
+  .card.tint{background:var(--primary-50);border-color:var(--primary-100)}
+  .card.dark{background:var(--warm-950);color:#fff;border-color:var(--warm-950)}
+  .card.primary{background:var(--primary-700);color:#fff;border-color:var(--primary-700)}
+  .card .badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:.04em}
+  .card h4{font-size:18px;font-weight:700;letter-spacing:-.01em;margin-bottom:8px}
+  .card .ctext{font-size:14px;line-height:1.55;opacity:.85}
+  .card .tags{margin-top:16px;display:flex;gap:6px;flex-wrap:wrap}
+  .card .tags span{font-size:11px;font-weight:600;padding:4px 9px;background:var(--warm-100);color:var(--warm-700)}
+  .card.dark .tags span,.card.primary .tags span{background:rgba(255,255,255,.14);color:rgba(255,255,255,.9)}
+
+  /* ---- Forms ---- */
+  .field{margin-bottom:18px}
+  .field label{display:block;font-size:13px;font-weight:600;margin-bottom:7px}
+  .input{width:100%;height:42px;padding:0 14px;font-family:var(--font);font-size:14px;
+    border:1px solid var(--border);background:#fff;border-radius:0;outline:none;transition:border .15s}
+  .input:focus{border-color:var(--primary-700);box-shadow:0 0 0 3px color-mix(in srgb,var(--primary-700) 18%,transparent)}
+  textarea.input{height:90px;padding:11px 14px;resize:vertical}
+  .check{display:flex;align-items:center;gap:10px;font-size:14px}
+  .check .box{width:18px;height:18px;border:1px solid var(--primary-700);background:var(--primary-700);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px}
+
+  /* ---- Spacing ---- */
+  .space-row{display:flex;align-items:center;gap:18px;padding:11px 0}
+  .space-bar{height:26px;background:var(--primary-700)}
+  .space-meta{font-size:13px;font-weight:600;width:170px;flex-shrink:0}
+  .space-meta span{color:var(--muted-fg);font-weight:500}
+
+  /* ---- Radius ---- */
+  .radius-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+  .radius-item{text-align:center}
+  .radius-box{height:96px;background:var(--primary-100);border:2px solid var(--primary-700);margin-bottom:12px}
+  .radius-name{font-size:13px;font-weight:700}
+  .radius-val{font-size:12px;color:var(--muted-fg)}
+  .radius-item.default .radius-box{background:var(--primary-700)}
+
+  /* ---- Elevation ---- */
+  .elev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .elev-card{background:#fff;padding:26px;border:1px solid var(--border)}
+  .elev-1{box-shadow:0 1px 2px rgba(26,22,37,.06)}
+  .elev-2{box-shadow:0 4px 6px -1px rgba(26,22,37,.08),0 12px 24px -8px rgba(26,22,37,.14)}
+  .elev-card h4{font-size:15px;font-weight:700;margin-bottom:6px}
+  .elev-card p{font-size:13px;color:var(--muted-fg)}
+
+  /* ---- Gradients ---- */
+  .grad-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .grad-box{height:120px;display:flex;align-items:flex-end;padding:16px;color:#fff;font-size:13px;font-weight:600}
+  .g-hero{background:linear-gradient(135deg,var(--primary-700),var(--primary-950))}
+  .g-text{background:var(--warm-50);color:var(--fg);align-items:center;justify-content:center;font-size:30px;font-weight:800;letter-spacing:-.02em}
+  .g-text .gp{background:linear-gradient(135deg,var(--primary-700),var(--primary-500));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .g-text .gm{background:linear-gradient(135deg,var(--primary-700),var(--secondary-600));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+  /* ---- Responsive table ---- */
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--border)}
+  th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted-fg);font-weight:700}
+  td:first-child{font-weight:700}
+  .mono{font-variant-numeric:tabular-nums}
+
+  /* ---- Do / Don't ---- */
+  .dd-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .dd{border:1px solid var(--border);padding:24px}
+  .dd h4{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .dd.do h4{color:var(--secondary-700)} .dd.dont h4{color:var(--error)}
+  .dd ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+  .dd li{font-size:13.5px;color:var(--fg);padding-left:22px;position:relative;line-height:1.5}
+  .dd.do li::before{content:"✓";position:absolute;left:0;color:var(--secondary-600);font-weight:800}
+  .dd.dont li::before{content:"✕";position:absolute;left:0;color:var(--error);font-weight:800}
+
+  footer{padding:48px 0 80px;color:var(--muted-fg);font-size:13px}
+
+  @media(max-width:900px){
+    .swatch-grid{grid-template-columns:repeat(2,1fr)}
+    .surf-grid,.elev-grid,.grad-grid{grid-template-columns:1fr}
+    .radius-grid{grid-template-columns:repeat(2,1fr)}
+    .scale-row{grid-template-columns:repeat(6,1fr)}
+    .type-row{grid-template-columns:1fr;gap:10px}
+    .dd-grid{grid-template-columns:1fr}
+    .topbar nav{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="dot"></span>
+  <span class="file">design-system-taejae.md</span>
+  <span class="muted">· TAEJAE AI Graduate School</span>
+  <nav>
+    <a href="#colors">Colors</a>
+    <a href="#type">Typography</a>
+    <a href="#buttons">Buttons</a>
+    <a href="#cards">Cards</a>
+    <a href="#spacing">Spacing</a>
+    <a href="#radius">Radius</a>
+    <a href="#elevation">Elevation</a>
+  </nav>
+</div>
+
+<div class="wrap">
+
+  <!-- Masthead -->
+  <div class="masthead">
+    <span class="kicker">Design System Analysis</span>
+    <h1>Design System of<br><span class="grad">TAEJAE</span> AI Graduate School</h1>
+    <p>White-dominant canvas, strategic purple, and sharp geometry. TJ Purple is an accent reserved for heroes, CTAs, badges, and headings — never a background flood. A single Pretendard typeface and right-angle surfaces bind it into one brand.</p>
+    <div class="pillrow">
+      <span class="pill fill">TJ Purple #522C81</span>
+      <span class="pill mint">TJ Mint #00A497</span>
+      <span class="pill">Pretendard Variable</span>
+      <span class="pill">Sharp Geometry · radius 0</span>
+      <span class="pill">White-dominant</span>
+    </div>
+  </div>
+
+  <!-- Colors -->
+  <section id="colors">
+    <div class="sec-head">
+      <div class="sec-no">01 — Foundations</div>
+      <h2 class="sec-title">Color Palette</h2>
+      <p class="sec-desc">Purple is the strategic accent, mint the interactive color, and warm purple-tinted neutrals fill the space between. Color is managed through a 3-level token architecture — raw scales never invert in dark mode.</p>
+    </div>
+
+    <div class="swatch-grid">
+      <div class="swatch"><div class="chip" style="background:var(--primary-700)"></div>
+        <div class="meta"><div class="name">TJ Purple <span class="tag">Brand</span></div><div class="hex">#522C81 · primary-700</div><div class="use">Heroes, primary CTA fill, badges, heading emphasis.</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--secondary-600)"></div>
+        <div class="meta"><div class="name">TJ Mint <span class="tag" style="background:var(--secondary-600)">Accent</span></div><div class="hex">#00A497 · secondary-600</div><div class="use">Links, hovers, success, secondary CTAs, eyebrows.</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--fg)"></div>
+        <div class="meta"><div class="name">Foreground</div><div class="hex">hsl(270 12% 10%)</div><div class="use">Primary headings & body — purple-undertone near-black.</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#fff;border-bottom:1px solid var(--border)"></div>
+        <div class="meta"><div class="name">Background</div><div class="hex">#FFFFFF</div><div class="use">The pure-white sheet everything sits on.</div></div></div>
+
+      <div class="swatch"><div class="chip" style="background:var(--primary-50)"></div>
+        <div class="meta"><div class="name">Alt Tint</div><div class="hex">#F7F3FB · primary-50</div><div class="use">Pale purple tint section, alternates with white.</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--warm-950)"></div>
+        <div class="meta"><div class="name">Dark Section</div><div class="hex">#1A1625 · warm-950</div><div class="use">Stats bands, footer — purple-tinted near-black.</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--warm-200)"></div>
+        <div class="meta"><div class="name">Warm Border</div><div class="hex">#EAE7EE · warm-200</div><div class="use">The 1px border on cards, inputs, dividers.</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--muted-fg)"></div>
+        <div class="meta"><div class="name">Muted Foreground</div><div class="hex">hsl(270 5% 45%)</div><div class="use">Secondary copy, captions, metadata.</div></div></div>
+    </div>
+
+    <!-- Scales -->
+    <div class="scale-label">Purple Scale — primary-50 → primary-950</div>
+    <div class="scale-sub">Raw scale, mode-invariant. primary-700 is always #522C81.</div>
+    <div class="scale-row" id="purpleScale"></div>
+
+    <div class="scale-label">Mint Scale — secondary-50 → secondary-950</div>
+    <div class="scale-row" id="mintScale"></div>
+
+    <div class="scale-label">Warm Neutrals — warm-50 → warm-950 (purple-tinted)</div>
+    <div class="scale-row" id="warmScale"></div>
+
+    <!-- Department -->
+    <div class="scale-label">Department Colors</div>
+    <div class="scale-sub">Badge colors distinguishing the five academic disciplines.</div>
+    <div class="swatch-grid" style="grid-template-columns:repeat(5,1fr);margin-top:14px">
+      <div class="swatch"><div class="chip" style="height:72px;background:var(--dept-if)"></div><div class="meta"><div class="name">IF</div><div class="hex">#522C81</div><div class="use">Future Convergence</div></div></div>
+      <div class="swatch"><div class="chip" style="height:72px;background:var(--dept-hs)"></div><div class="meta"><div class="name">H&amp;S</div><div class="hex">#00A497</div><div class="use">Humanities &amp; Social</div></div></div>
+      <div class="swatch"><div class="chip" style="height:72px;background:var(--dept-bi)"></div><div class="meta"><div class="name">BI</div><div class="hex">#2563EB</div><div class="use">Business Innovation</div></div></div>
+      <div class="swatch"><div class="chip" style="height:72px;background:var(--dept-ns)"></div><div class="meta"><div class="name">NS</div><div class="hex">#EA580C</div><div class="use">Natural Sciences</div></div></div>
+      <div class="swatch"><div class="chip" style="height:72px;background:var(--dept-dsai)"></div><div class="meta"><div class="name">DS&amp;AI</div><div class="hex">#7C3AED</div><div class="use">Data Science &amp; AI</div></div></div>
+    </div>
+  </section>
+
+  <!-- Typography -->
+  <section id="type">
+    <div class="sec-head">
+      <div class="sec-no">02 — Foundations</div>
+      <h2 class="sec-title">Typography</h2>
+      <p class="sec-desc">A single typeface, Pretendard Variable (45–920), carries everything. Headings are packed tight with heavy weights and negative tracking; English eyebrows label sections in uppercase. No second face.</p>
+    </div>
+
+    <div class="type-row"><div class="type-spec"><b>display-7xl</b>72px · 800 · -0.04em</div><div class="type-sample t7">AI 시대를 선도하는</div></div>
+    <div class="type-row"><div class="type-spec"><b>display-6xl</b>60px · 800 · -0.035em</div><div class="type-sample t6">융합형 인재 양성</div></div>
+    <div class="type-row"><div class="type-spec"><b>heading-5xl</b>48px · 700 · -0.03em</div><div class="type-sample t5">교육 과정 안내</div></div>
+    <div class="type-row"><div class="type-spec"><b>heading-4xl</b>36px · 700 · -0.025em</div><div class="type-sample t4">Section Header</div></div>
+    <div class="type-row"><div class="type-spec"><b>heading-3xl</b>30px · 700 · snug</div><div class="type-sample t3">AI 융합 전략 리더십</div></div>
+    <div class="type-row"><div class="type-spec"><b>heading-2xl</b>24px · 600 · snug</div><div class="type-sample t2">Component Header</div></div>
+    <div class="type-row"><div class="type-spec"><b>label / eyebrow</b>13px · 600 · uppercase</div><div class="type-sample eyebrow-demo">Academy Programs</div></div>
+    <div class="type-row"><div class="type-spec"><b>lead-xl</b>20px · 400</div><div class="type-sample tlead">기술과 인문학을 잇는 융합 교육으로 미래를 설계합니다.</div></div>
+    <div class="type-row"><div class="type-spec"><b>body-base</b>16px · 400 · relaxed</div><div class="type-sample tbody">태재대학교 AI미래전략대학원은 화이트 중심 레이아웃 위에서 보라색을 전략적으로 사용하는 디자인 시스템을 따릅니다.</div></div>
+    <div class="type-row"><div class="type-spec"><b>body-sm</b>14px · 400</div><div class="type-sample tsm">Small text, captions, and metadata sit at this size.</div></div>
+  </section>
+
+  <!-- Buttons -->
+  <section id="buttons">
+    <div class="sec-head">
+      <div class="sec-no">03 — Components</div>
+      <h2 class="sec-title">Button Variants</h2>
+      <p class="sec-desc">shadcn/ui (New York) with right angles. Purple is the default CTA, mint the secondary. Every button is sharp — radius 0.</p>
+    </div>
+
+    <div class="demo-block">
+      <div class="demo-label">Variants</div>
+      <div class="demo-grid">
+        <button class="btn btn-default">입학 지원하기</button>
+        <button class="btn btn-secondary">더 알아보기</button>
+        <button class="btn btn-outline">전체 보기</button>
+        <button class="btn btn-ghost">자세히</button>
+        <button class="btn btn-link">바로가기 →</button>
+        <button class="btn btn-destructive">삭제</button>
+      </div>
+    </div>
+    <div class="demo-block">
+      <div class="demo-label">Sizes</div>
+      <div class="demo-grid">
+        <button class="btn btn-default btn-sm">Small · h-32</button>
+        <button class="btn btn-default">Default · h-40</button>
+        <button class="btn btn-default btn-lg">Large · h-44</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cards -->
+  <section id="cards">
+    <div class="sec-head">
+      <div class="sec-no">04 — Components</div>
+      <h2 class="sec-title">Cards &amp; Surfaces</h2>
+      <p class="sec-desc">Flat by default — a 1px border before any shadow. Surfaces alternate white, pale tint, purple, and dark to build the page's color-block rhythm.</p>
+    </div>
+    <div class="surf-grid">
+      <div class="card">
+        <span class="badge" style="background:var(--dept-if)">IF · 미래융합</span>
+        <h4>AI 융합 전략 리더십</h4>
+        <p class="ctext">AI 기술을 비즈니스 전략에 융합하는 리더를 양성하는 과정입니다.</p>
+        <div class="tags"><span>리더십</span><span>전략</span><span>2학기</span></div>
+      </div>
+      <div class="card tint">
+        <span class="badge" style="background:var(--secondary-600)">Alt Tint</span>
+        <h4>연보라 틴트 섹션</h4>
+        <p class="ctext">primary-50 배경. 화이트 섹션과 교차해 시각적 리듬을 만듭니다.</p>
+        <div class="tags"><span>primary-50</span><span>#F7F3FB</span></div>
+      </div>
+      <div class="card primary">
+        <span class="badge" style="background:rgba(255,255,255,.2)">CTA Banner</span>
+        <h4>AI 시대의 리더가 되어보세요</h4>
+        <p class="ctext">보라 배경의 콜투액션 배너. 페이지 말미에 배치합니다.</p>
+        <div class="tags"><span>primary-700</span><span>상담 신청</span></div>
+      </div>
+      <div class="card dark">
+        <span class="badge" style="background:var(--secondary-600)">Stats · Dark</span>
+        <h4>95% 취업률 · 50+ 교수진</h4>
+        <p class="ctext">warm-950 다크 섹션. 통계·대비 구간에 사용합니다.</p>
+        <div class="tags"><span>warm-950</span><span>#1A1625</span></div>
+      </div>
+      <div class="card">
+        <span class="badge" style="background:var(--dept-dsai)">Profile</span>
+        <h4>김민수 · 교수</h4>
+        <p class="ctext">"AI는 도구가 아닌 사고의 확장입니다."</p>
+        <div class="tags"><span>머신러닝</span><span>전략경영</span></div>
+      </div>
+      <div class="card">
+        <span class="badge" style="background:var(--warm-700)">Flat · Level 0</span>
+        <h4>기본 콘텐츠 카드</h4>
+        <p class="ctext">배경 흰색, 1px 보더, 직각. 그림자 없는 flat이 기본입니다.</p>
+        <div class="tags"><span>border</span><span>rounded-none</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Forms -->
+  <section id="forms">
+    <div class="sec-head">
+      <div class="sec-no">05 — Components</div>
+      <h2 class="sec-title">Form Elements</h2>
+      <p class="sec-desc">Right-angle inputs with a warm border; focus draws the purple ring.</p>
+    </div>
+    <div style="max-width:520px">
+      <div class="field"><label>이름</label><input class="input" placeholder="홍길동"></div>
+      <div class="field"><label>이메일 (focus 상태)</label><input class="input" value="taejae@example.com" style="border-color:var(--primary-700);box-shadow:0 0 0 3px color-mix(in srgb,var(--primary-700) 18%,transparent)"></div>
+      <div class="field"><label>문의 내용</label><textarea class="input" placeholder="내용을 입력하세요"></textarea></div>
+      <div class="check"><span class="box">✓</span> 개인정보 수집 및 이용에 동의합니다.</div>
+    </div>
+  </section>
+
+  <!-- Spacing -->
+  <section id="spacing">
+    <div class="sec-head">
+      <div class="sec-no">06 — Foundations</div>
+      <h2 class="sec-title">Spacing Scale</h2>
+      <p class="sec-desc">Vertical section rhythm is the skeleton of the layout. Sections breathe at 48–128px; cards keep tight internal rhythm.</p>
+    </div>
+    <div id="spacing-bars"></div>
+  </section>
+
+  <!-- Radius -->
+  <section id="radius">
+    <div class="sec-head">
+      <div class="sec-no">07 — Foundations</div>
+      <h2 class="sec-title">Border Radius — Sharp Geometry</h2>
+      <p class="sec-desc">The default is a right angle (0). Rounded corners are deliberately restrained; only avatars and circular icons go full.</p>
+    </div>
+    <div class="radius-grid">
+      <div class="radius-item default"><div class="radius-box" style="border-radius:0"></div><div class="radius-name">none — default</div><div class="radius-val">0</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:2px"></div><div class="radius-name">sm</div><div class="radius-val">2px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:4px"></div><div class="radius-name">md</div><div class="radius-val">4px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:8px"></div><div class="radius-name">lg</div><div class="radius-val">8px</div></div>
+      <div class="radius-item"><div class="radius-box" style="border-radius:9999px"></div><div class="radius-name">full</div><div class="radius-val">avatars only</div></div>
+    </div>
+  </section>
+
+  <!-- Elevation -->
+  <section id="elevation">
+    <div class="sec-head">
+      <div class="sec-no">08 — Foundations</div>
+      <h2 class="sec-title">Elevation &amp; Depth</h2>
+      <p class="sec-desc">Depth is restrained — a 1px border and a white-on-white surface step is preferred over shadow. Color-block sections create their own depth.</p>
+    </div>
+    <div class="elev-grid">
+      <div class="elev-card"><h4>Level 0 — Flat</h4><p>1px border, no shadow. Default cards, inputs, dividers.</p></div>
+      <div class="elev-card elev-1"><h4>Level 1 — Subtle</h4><p>Border + micro-shadow. Lightly-raised cards, outline buttons.</p></div>
+      <div class="elev-card elev-2"><h4>Level 2 — Floating</h4><p>Soft layered shadow. Menus, modals, dropdowns, sticky header.</p></div>
+    </div>
+  </section>
+
+  <!-- Gradients -->
+  <section id="gradients">
+    <div class="sec-head">
+      <div class="sec-no">09 — Foundations</div>
+      <h2 class="sec-title">Brand Gradients</h2>
+      <p class="sec-desc">Restrained gradients built from the purple family — driven by lightness, not color mixing. The hero gradient is the only atmospheric element.</p>
+    </div>
+    <div class="grad-grid">
+      <div class="grad-box g-hero">Hero · #522C81 → #250F3D</div>
+      <div class="grad-box g-text"><span class="gp">text-gradient-primary</span></div>
+      <div class="grad-box g-text"><span class="gm">기술과 인문학</span></div>
+    </div>
+  </section>
+
+  <!-- Responsive -->
+  <section id="responsive">
+    <div class="sec-head">
+      <div class="sec-no">10 — Foundations</div>
+      <h2 class="sec-title">Responsive Behavior</h2>
+    </div>
+    <table>
+      <thead><tr><th>Breakpoint</th><th class="mono">Width</th><th>Key Changes</th></tr></thead>
+      <tbody>
+        <tr><td>Mobile</td><td class="mono">0px+</td><td>Single-column stacks; nav → menu trigger; hero type scales down.</td></tr>
+        <tr><td>sm</td><td class="mono">640px+</td><td>Large mobile.</td></tr>
+        <tr><td>md</td><td class="mono">768px+</td><td>2-up card grids; tablet.</td></tr>
+        <tr><td>lg</td><td class="mono">1024px+</td><td>3–4-up grids; full nav row.</td></tr>
+        <tr><td>xl</td><td class="mono">1280px+</td><td>Centered max-width container (max-w-7xl).</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Do / Don't -->
+  <section id="guidelines">
+    <div class="sec-head">
+      <div class="sec-no">11 — Guidelines</div>
+      <h2 class="sec-title">Do's &amp; Don'ts</h2>
+    </div>
+    <div class="dd-grid">
+      <div class="dd do">
+        <h4>Do</h4>
+        <ul>
+          <li>Keep the canvas pure white; place purple only on heroes, CTAs, badges, headings.</li>
+          <li>Use mint for interaction — links, hovers, success, secondary CTAs, eyebrows.</li>
+          <li>Make every surface a right angle (rounded-none) — sharp geometry is the brand.</li>
+          <li>Specify color through tokens; compose layout with Container / Section.</li>
+          <li>Alternate white ↔ pale tint ↔ dark sections for page rhythm.</li>
+        </ul>
+      </div>
+      <div class="dd dont">
+        <h4>Don't</h4>
+        <ul>
+          <li>Don't flood the whole screen with purple — it's an accent, not a background.</li>
+          <li>Don't use rounded corners on content cards or buttons.</li>
+          <li>Don't hardcode raw hex — <span class="mono">bg-[#522C81]</span> is forbidden.</li>
+          <li>Don't use the Tailwind default palette — only primary / secondary / warm.</li>
+          <li>Don't invert raw scales in dark mode — only semantic tokens switch.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Source: <strong>design-system-taejae.md</strong> · TAEJAE AI Graduate School Design System · TJ Purple #522C81 · TJ Mint #00A497 · Pretendard Variable
+  </footer>
+
+</div>
+
+<script>
+  const purple=['#F7F3FB','#EDE5F5','#D9C8EA','#BFA3D9','#A07AC4','#8254AC','#6B3F94','#522C81','#47266E','#3B1F5B','#250F3D'];
+  const mint=['#EFFEFB','#C8FFF6','#91FFED','#52F5E1','#1EDECF','#00C2B5','#00A497','#007D74','#06635D','#0A524D','#003230'];
+  const warm=['#FAF9FB','#F4F2F6','#EAE7EE','#D8D3E0','#BFB8CA','#A69DB3','#8E839C','#766B84','#635A6E','#524A5B','#1A1625'];
+  const steps=[50,100,200,300,400,500,600,700,800,900,950];
+  function fillScale(id,arr){
+    const el=document.getElementById(id);
+    arr.forEach((c,i)=>{
+      const d=document.createElement('div');
+      d.className='scale-cell';d.style.background=c;
+      d.style.color=i>=5?'#fff':'rgba(0,0,0,.55)';
+      d.textContent=steps[i];
+      el.appendChild(d);
+    });
+  }
+  fillScale('purpleScale',purple);fillScale('mintScale',mint);fillScale('warmScale',warm);
+
+  const spaces=[
+    ['xxs','4px','gap-1',4],['xs','8px','gap-2',8],['sm','12px','gap-3',12],['md','16px','gap-4',16],
+    ['lg','24px','gap-6 · card padding',24],['section-sm','48px','py-12',48],['section','80px','py-20 default',80],
+    ['section-lg','96px','py-24',96],['section-xl','128px','py-32',128]
+  ];
+  const sb=document.getElementById('spacing-bars');
+  spaces.forEach(([n,v,u,w])=>{
+    const row=document.createElement('div');row.className='space-row';
+    row.innerHTML=`<div class="space-meta">${n} · ${v}<br><span>${u}</span></div><div class="space-bar" style="width:${Math.min(w*4.2,540)}px"></div>`;
+    sb.appendChild(row);
+  });
+</script>
+</body>
+</html>

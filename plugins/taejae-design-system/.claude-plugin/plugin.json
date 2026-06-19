@@ -1,0 +1,8 @@
+{
+  "name": "taejae-design-system",
+  "version": "1.0.0",
+  "description": "Build UI, pages, components, or mockups in the TAEJAE (태재대학교 AI미래전략대학원 / TAEJAE AI Graduate School) brand design system. Enforces the brand rules — white-dominant canvas, TJ Purple (#522C81) as accent only, TJ Mint (#00A497) for interaction, right-angle (sharp) geometry, the 3-level token system, Pretendard Variable — and outputs Next.js + Tailwind v4 code or a self-contained HTML/CSS mockup.",
+  "author": {
+    "name": "soominKim"
+  }
+}

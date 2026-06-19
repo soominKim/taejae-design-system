@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "taejae",
+  "version": "1.0.0",
+  "description": "TAEJAE University design system — Claude Code plugin marketplace",
+  "owner": {
+    "name": "soominKim"
+  },
+  "plugins": [
+    {
+      "name": "taejae-design-system",
+      "source": "./plugins/taejae-design-system",
+      "description": "Build UI, pages, components, or mockups in the TAEJAE (태재대학교 AI미래전략대학원) brand design system — white-dominant canvas, TJ Purple accent, TJ Mint interaction, sharp geometry, Pretendard. Outputs Next.js + Tailwind v4 code or standalone HTML/CSS.",
+      "version": "1.0.0"
+    }
+  ]
+}
